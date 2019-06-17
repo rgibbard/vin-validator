@@ -86,7 +86,7 @@ def new_random_digit_str(old_val: str) -> str:
     if new_val != old_val:
         return new_val
     else:
-        return new_random_digit_str(old_val)
+        return new_random_digit_str(len(old_val))
 
 
 def log_return(*vals: str) -> str:
