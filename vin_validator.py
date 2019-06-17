@@ -76,17 +76,17 @@ def vin_chk_digit_to_str(val: int) -> str:
     return str(val) if val != 10 else "X"
 
 
-def random_digit_str(len_: str) -> str:
+def random_digit_str(len_: int) -> str:
     return ''.join(random.choices(string.digits, k=len_))
 
 
-def new_random_digit_str(old_val: str) -> str:
+def replace_random_digit_str(old_val: str) -> str:
     new_val = random_digit_str(len(old_val))
 
     if new_val != old_val:
         return new_val
     else:
-        return new_random_digit_str(len(old_val))
+        return replace_random_digit_str(len(old_val))
 
 
 def log_return(*vals: str) -> str:
@@ -132,7 +132,7 @@ def scramble_vin(vin: str) -> str:
     model_year = slice(9,10)
     assembly_plant = slice(10,11)
     production_seq = slice(-6, None)
-    new_prod_seq = new_random_digit_str(vin[production_seq])
+    new_prod_seq = replace_random_digit_str(vin[production_seq])
 
     first_half = vin[country_code] + vin[manufacturer_id] + vin[vehicle_descriptor]
     second_half = vin[model_year] + vin[assembly_plant] + new_prod_seq
